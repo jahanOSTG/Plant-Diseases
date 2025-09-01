@@ -75,5 +75,18 @@ The dataset is from [Kaggle: Plant Disease Recognition](https://www.kaggle.com/d
 
 ---
 
-## 📁 File Structure
+---
+
+## 📌 References
+- [EfficientNet: Rethinking Model Scaling for CNNs](https://arxiv.org/abs/1905.11946)
+- [Kaggle Plant Disease Dataset](https://www.kaggle.com/datasets/rashikrahmanpritom/plant-disease-recognition-dataset)
+
+---
+
+## 🔧 Technologies Used
+- Python 3.x
+- TensorFlow & Keras
+- NumPy, Pandas, Matplotlib, Seaborn
+- PIL (Image Processing)
+- Google Colab
 
