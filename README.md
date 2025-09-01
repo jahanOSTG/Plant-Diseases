@@ -1,1 +1,79 @@
-https://www.kaggle.com/datasets/rashikrahmanpritom/plant-disease-recognition-dataset
+# 🌱 Plant Disease Classification using EfficientNetB0
+
+## 📌 Project Overview
+This project aims to classify **plant leaves** into three categories:
+- **Healthy**
+- **Powdery Mildew**
+- **Rust**
+
+We used **EfficientNetB0 (Transfer Learning)** with fine-tuning to build a high-accuracy classification model.
+
+The dataset is from [Kaggle: Plant Disease Recognition](https://www.kaggle.com/datasets/rashikrahmanpritom/plant-disease-recognition-dataset).
+
+---
+
+## ⚙️ Workflow
+
+### 1. Data Preparation
+- Dataset organized into `Train`, `Validation`, and `Test` folders.
+- **Classes**: `Healthy`, `Powdery`, `Rust`.
+- Image augmentation applied to increase dataset diversity:
+  - Rotation, width/height shift, shear, zoom, horizontal/vertical flip
+- Preprocessing using **EfficientNetB0 preprocess_input**.
+
+### 2. Model Architecture
+- **Base Model**: EfficientNetB0 (ImageNet pretrained, top removed)
+- **Added Layers**:
+  - `GlobalAveragePooling2D`
+  - `Dropout(0.4)`
+  - `Dense(3, activation='softmax')`
+- **Optimizer**: Adam
+- **Loss Function**: Categorical Crossentropy
+- **Metrics**: Accuracy
+
+### 3. Training Strategy
+- **Phase 1 (Feature Extraction)**: Freeze base model, train only added head layers.
+- **Phase 2 (Fine-tuning)**: Unfreeze top 50 layers of EfficientNetB0 for further training.
+- **Callbacks Used**:
+  - `EarlyStopping`
+  - `ReduceLROnPlateau`
+  - `ModelCheckpoint`
+
+### 4. Results
+- **Validation Accuracy:** 100% (best epoch)
+- **Test Accuracy:** 93.3%
+- Confusion Matrix & Classification Report show high precision and recall across all classes.
+
+### 5. Visualization
+- Training/Validation Accuracy & Loss curves.
+- Confusion Matrix heatmap.
+
+### 6. Prediction on Custom Images
+- Preprocess custom image (resize 224x224, preprocess_input)
+- Use the trained model for prediction.
+- Display predicted class and probability scores.
+
+---
+
+## 📊 Performance Metrics
+
+| Class     | Precision | Recall | F1-score | Support |
+|-----------|-----------|--------|----------|---------|
+| Healthy   | 0.93      | 0.86   | 0.90     | 50      |
+| Powdery   | 0.90      | 0.94   | 0.92     | 50      |
+| Rust      | 0.96      | 1.00   | 0.98     | 50      |
+
+**Overall Test Accuracy: 93%**
+
+---
+
+## 🚀 Key Takeaways
+- Transfer learning with EfficientNetB0 gave excellent performance.
+- Data augmentation improved model generalization.
+- Fine-tuning boosted validation accuracy to **100%**.
+- The trained model successfully predicts plant diseases from unseen images.
+
+---
+
+## 📁 File Structure
+
